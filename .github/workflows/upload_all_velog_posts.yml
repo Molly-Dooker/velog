@@ -6,37 +6,38 @@ on:
 jobs:
   upload_all_velog_posts_by_series:
     runs-on: ubuntu-latest
+    
+    permissions: # ✨ 이 부분을 추가하면 해결됩니다.
+      contents: write
 
     steps:
-      # 리포지토리 체크아웃 (버전 업데이트 v2 -> v4)
       - name: Checkout
         uses: actions/checkout@v4
+        # checkout 스텝에 토큰을 직접 지정하여 권한 문제를 해결할 수도 있습니다.
+        # with:
+        #   token: ${{ secrets.GH_PAT }}
 
-      # Git Config 설정
       - name: Set up Git
         run: |
           git config --global user.name 'Molly-Dooker'
           git config --global user.email 'room0729@gmail.com'
-          git remote set-url origin https://Molly-Dooker:${{ secrets.GH_PAT }}@github.com/Molly-Dooker/velog.git
+          # permissions를 설정했기 때문에 아래 라인은 이제 필요 없을 수 있습니다.
+          # git remote set-url origin https://Molly-Dooker:${{ secrets.GH_PAT }}@github.com/Molly-Dooker/velog.git
 
-      # 원격 변경 사항을 로컬에 적용
       - name: Pull changes from remote
         run: |
           git pull --rebase origin main
 
-      # Python 3.9 설정 (버전 업데이트 v2 -> v5)
       - name: Set up Python 3.9
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
-      # 필요한 Python 의존성 설치
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install feedparser gitpython requests
 
-      # Python 스크립트 실행
       - name: Run script
         env:
           VELOG_ID: "notepad"
