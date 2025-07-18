@@ -6,7 +6,7 @@
 
 ## 세팅
 
-1. 프로젝트 내부의 `<<Github ID>>`, `<<Github Email>>`, `<<Velog ID>>`, `<<Current Repository Name>>`을 찾아서 변경합니다.
+1. 프로젝트 내부의 `Molly-Dooker`, `room0729@gmail.com`, `notepad`, `velog`을 찾아서 변경합니다.
    ![img.png](images/setting_1.png)
 
     - Current Repository는 본인 레포지토리 주소를 의미합니다.
